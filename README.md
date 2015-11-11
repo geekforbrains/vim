@@ -6,3 +6,5 @@ This repo makes use of git submodules. Follow these steps to make use of it:
 2. `cd ~/.vim`
 3. `git submodule init`
 4. `git submodule update`
+5. `cp vimrc ~/.vimrc`
+6. `vim`
