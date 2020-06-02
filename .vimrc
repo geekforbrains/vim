@@ -7,23 +7,24 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf'
 call plug#end()
 
+" Shortcuts
 " Clear highlighted searches
-nnoremap /<space> :nohlsearch<CR>
+nnoremap <space>/ :nohlsearch<CR>
 
 " Fuzzy search with FZF
-nnoremap f<space> :FZF<CR>
+nnoremap <space>f :FZF<CR>
 
 " Strict search with FZF
-nnoremap s<space> :FZF -e<CR>
+nnoremap <space>s :FZF -e<CR>
 
 " New tab
-nnoremap t<space> :tabnew<CR>
+nnoremap <space>t :tabnew<CR>
 
 " Tab left
-nnoremap h<space> :tabprevious<CR>
+nnoremap <space>h :tabprevious<CR>
 
 " Tab right
-nnoremap l<space> :tabnext<CR>
+nnoremap <space>l :tabnext<CR>
 
 " Color scheme / theme
 set termguicolors
@@ -37,14 +38,17 @@ syntax on
 " Show line numbers
 set number
 
-" Indent on new lines
-set autoindent
-
 " How many lines of history vim remembers
 set history=100
 
 " Update files changed outside vim
 set autoread
+
+" Autoindent duh
+set autoindent
+
+" Show matching brackets
+set showmatch
 
 " Show current position
 set ruler
@@ -56,7 +60,7 @@ set hlsearch
 set colorcolumn=100
 
 " Show matching brackets
-set showmatch
+"set showmatch
 
 " Use spaces insead of tabs when using tab key
 set expandtab
