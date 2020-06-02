@@ -59,9 +59,6 @@ set hlsearch
 " Set vertical ruler to 80
 set colorcolumn=100
 
-" Show matching brackets
-"set showmatch
-
 " Use spaces insead of tabs when using tab key
 set expandtab
 set shiftwidth=2
@@ -80,7 +77,4 @@ let NERDTreeIgnore = ['\.pyc$', '__pycache__', 'env']
 
 " Close NERDTree after I open a file from it
 let NERDTreeQuitOnOpen=1
-
-" Run NERDTree on start
-"autocmd vimenter * NERDTree
 
