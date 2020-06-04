@@ -34,6 +34,9 @@ set t_Co=256
 colorscheme monokai_pro
 let g:lightline = {'colorscheme': 'monokai_pro'}
 
+" Fix backspace
+set backspace=indent,eol,start
+
 " Syntax highlighting
 syntax on
 
