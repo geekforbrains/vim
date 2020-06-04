@@ -4,7 +4,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf'
-Plug 'ajh17/VimCompletesMe'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 " Show lightline status bar
@@ -21,6 +21,12 @@ nnoremap <space>e :Explore<CR>
 
 " Close (delete) buffer
 nnoremap <space>c :bd<CR>
+
+" Easier split switching
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Color scheme / theme
 set termguicolors
@@ -52,11 +58,8 @@ set ruler
 " Highlight search results
 set hlsearch
 
-" Set vertical ruler to 80
+" Set vertical ruler
 set colorcolumn=100
-
-" Show matching brackets
-"set showmatch
 
 " Use spaces insead of tabs when using tab key
 set expandtab
@@ -71,15 +74,10 @@ set nobackup
 set nowb
 set noswapfile
 
-" Ignore files in NERDTree
-"let NERDTreeIgnore = ['\.pyc$', '__pycache__', 'env']
+" Split more naturally
+set splitbelow
+set splitright
 
-" Close NERDTree after I open a file from it
-"let NERDTreeQuitOnOpen=1
-
-" Run NERDTree on start
-"autocmd vimenter * NERDTree
-
-" Explorer
+" Explorer config
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
