@@ -1,10 +1,9 @@
-" Install plugins first (using vim-plug)
 call plug#begin('~/.vim/plugged')
-Plug 'sheerun/vim-polyglot'
-Plug 'phanviet/vim-monokai-pro'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'sheerun/vim-polyglot' " Better syntax highlighting
+Plug 'morhetz/gruvbox' " Theme
+Plug 'vim-airline/vim-airline' " Status bar
+Plug 'junegunn/fzf' " Fuzzy search
+Plug 'christoomey/vim-tmux-navigator' " Navigate Vim/Tmux via HJKL
 call plug#end()
 
 " Show lightline status bar
@@ -31,8 +30,8 @@ nnoremap <C-H> <C-W><C-H>
 " Color scheme / theme
 set termguicolors
 set t_Co=256
-colorscheme monokai_pro
-let g:lightline = {'colorscheme': 'monokai_pro'}
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
 
 " Fix backspace
 set backspace=indent,eol,start
