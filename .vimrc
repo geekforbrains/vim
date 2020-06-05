@@ -84,3 +84,6 @@ set splitright
 " Explorer config
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
+
+" Ignore list for vimgrep
+set wildignore+=__pycache__/**,node_modules/**,env/**
