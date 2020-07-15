@@ -3,7 +3,6 @@ Plug 'sheerun/vim-polyglot' " Better syntax highlighting
 Plug 'arcticicestudio/nord-vim' " Color scheme
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'junegunn/fzf' " Fuzzy search
-Plug 'christoomey/vim-tmux-navigator' " Navigate Vim/Tmux via HJKL
 Plug 'davidhalter/jedi-vim' " Python auto-complete
 Plug 'scrooloose/nerdcommenter' " Easier commenting
 call plug#end()
@@ -21,7 +20,10 @@ nnoremap <leader>f :FZF<CR>
 nnoremap <leader>e :Explore<CR>
 
 " Close (delete) open buffer
-nnoremap <space>q :bd<CR>
+nnoremap <leader>q :bd<CR>
+
+" Open grep search
+nnoremap <leader>o :copen<CR>
 
 " Move between panes/splits via JKLH
 nnoremap <C-J> <C-W><C-J>
@@ -90,3 +92,6 @@ set wildignore+=__pycache__/**,node_modules/**,env/**
 
 " To ensure NERDComment plugin works correctly
 filetype plugin on
+
+" Disable jedi vims auto complete on 'dot'
+let g:jedi#popup_on_dot = 0
