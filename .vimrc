@@ -5,6 +5,7 @@ Plug 'vim-airline/vim-airline' " Status bar
 Plug 'junegunn/fzf' " Fuzzy search
 Plug 'davidhalter/jedi-vim' " Python auto-complete
 Plug 'scrooloose/nerdcommenter' " Easier commenting
+Plug 'airblade/vim-gitgutter' " Show git diffs in left gutter
 call plug#end()
 
 " Set leader as space
