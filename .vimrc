@@ -86,6 +86,7 @@ set splitright
 " File explorer config
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
+let g:netrw_list_hide= '__pycache__/,.git/,env/'
 
 " Ignore list for vimgrep
 set wildignore+=__pycache__/**,node_modules/**,env/**
