@@ -6,6 +6,7 @@ Plug 'junegunn/fzf' " Fuzzy search
 Plug 'davidhalter/jedi-vim' " Python auto-complete
 Plug 'scrooloose/nerdcommenter' " Easier commenting
 Plug 'airblade/vim-gitgutter' " Show git diffs in left gutter
+Plug 'preservim/nerdtree' " File explorer
 call plug#end()
 
 " Set leader as space
@@ -18,7 +19,8 @@ nnoremap <leader>, :nohlsearch<CR>
 nnoremap <leader>f :FZF<CR>
 
 " File explorer (instead of NERDTree)
-nnoremap <leader>e :Explore<CR>
+"nnoremap <leader>e :Explore<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
 
 " Close (delete) open buffer
 nnoremap <leader>q :bd<CR>
@@ -84,11 +86,6 @@ set noswapfile
 set splitbelow
 set splitright
 
-" File explorer config
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
-let g:netrw_list_hide= '__pycache__/,.git/,env/'
-
 " Ignore list for vimgrep
 set wildignore+=__pycache__/**,node_modules/**,env/**
 
@@ -97,3 +94,32 @@ filetype plugin on
 
 " Disable jedi vims auto complete on 'dot'
 let g:jedi#popup_on_dot = 0
+
+" NERDCommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+" Ignore certain failes
+set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*node_modules*
+let NERDTreeRespectWildIgnore=1
