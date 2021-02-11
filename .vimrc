@@ -2,7 +2,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot' " Better syntax highlighting
 Plug 'arcticicestudio/nord-vim' " Color scheme
 Plug 'vim-airline/vim-airline' " Status bar
-Plug 'junegunn/fzf' " Fuzzy search
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search
+Plug 'junegunn/fzf.vim'
 Plug 'davidhalter/jedi-vim' " Python auto-complete
 Plug 'scrooloose/nerdcommenter' " Easier commenting
 Plug 'airblade/vim-gitgutter' " Show git diffs in left gutter
@@ -33,6 +34,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Copy and paste
+noremap <leader>y "*y
+noremap <leader>p "*p
 
 " Color scheme / theme tweaks
 set termguicolors
@@ -121,5 +126,17 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 " Ignore certain failes
-set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*node_modules*
+set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*node_modules*,*__pycache__*
 let NERDTreeRespectWildIgnore=1
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  " set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+" bind K to grep word under cursor
+nnoremap F :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+set rtp+=/usr/local/opt/fzf
