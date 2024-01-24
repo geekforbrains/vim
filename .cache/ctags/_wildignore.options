@@ -1,0 +1,16 @@
+__pycache__/**
+node_modules/**
+env/**
+*.pyc
+*.o
+*.obj
+*.svn
+*.swp
+*.class
+*.hg
+*.DS_Store
+*node_modules*
+*__pycache__*
+*.git*
+*.bundle*
+env

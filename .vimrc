@@ -22,9 +22,10 @@ Plug 'junegunn/fzf.vim' " Fuzzy search integration with Vim
 Plug 'scrooloose/nerdcommenter' " Easier commenting
 Plug 'airblade/vim-gitgutter' " Show git diffs in left gutter
 Plug 'preservim/nerdtree' " File explorer
-Plug 'vim-scripts/AutoComplPop' " Auto-show vims complete menu while typing
 Plug 'dense-analysis/ale' " ESLint tooling
 Plug 'tpope/vim-fugitive' " Git tooling
+Plug 'github/copilot.vim' " Github Copilot / AI
+Plug 'ludovicchabant/vim-gutentags' " Auto ctag-ing
 call plug#end()
 
 " =================================================================================================
@@ -121,6 +122,9 @@ nnoremap <leader>q :bd<CR>
 " Open quickfix pane
 nnoremap <leader>o :copen<CR>
 
+" Open GitHub Copilot AI panel
+nnoremap <leader>c :Copilot panel<CR>
+
 " Move between panes/splits via JKLH
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -136,6 +140,19 @@ noremap <leader>p "*p
 nnoremap <leader>r :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <leader>r "sy:let @/=@s<CR>cgn
 
+" ctag jump to definition
+nnoremap <leader>d :tag <C-r><C-w><CR>
+
+" ctag go back
+nnoremap <leader>b :pop<CR>
+
+" Navigate buffers with [ and ]
+nnoremap <leader>[ :bprevious<CR>
+nnoremap <leader>] :bnext<CR>
+
+" Toggle line wrap
+nnoremap <leader>w :set wrap!<CR>
+
 " =================================================================================================
 " THEME SETTINGS
 " =================================================================================================
@@ -150,9 +167,14 @@ colorscheme nord
 " =================================================================================================
 
 " Set Python files to use 4 spaces
-autocmd filetype python set expandtab
-autocmd filetype python set shiftwidth=4
-autocmd filetype python set tabstop=4
+autocmd FileType python set expandtab
+autocmd FileType python set shiftwidth=4
+autocmd FileType python set tabstop=4
+
+" For HTML and JS
+autocmd filetype html,htmldjango,javascript set expandtab
+autocmd filetype html,htmldjango,javascript set shiftwidth=2
+autocmd filetype html,htmldjango,javascript set tabstop=2
 
 " =================================================================================================
 " PLUGIN SETTINGS
@@ -189,7 +211,7 @@ let g:NERDToggleCheckAllLines = 1
 let NERDTreeShowHidden=1
 
 " Ignore these files in file explorer
-set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*node_modules*,*__pycache__*,*.git*,*.bundle*
+set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*node_modules*,*__pycache__*,*.git*,*.bundle*,env
 let NERDTreeRespectWildIgnore=1
 
 " Make file explorer window a bit smaller
@@ -198,9 +220,14 @@ let g:NERDTreeWinSize=25
 " Set ALE lint tooling to use eslint only
 let g:ale_fixers = ['eslint']
 
+" Change ctags dir
+let g:gutentags_cache_dir = '.cache/ctags'
+
 " Set airline to same theme as Vim
 let g:airline_theme='nord'
 
 " Tell vim where FZF bin is located
 set rtp+=/usr/local/opt/fzf
+
+let $FZF_DEFAULT_COMMAND="find . -type f | grep -v '/env/' | grep -v '/\.git/' | grep -v '.pyc$' | grep -v '/\.cache/'"
 

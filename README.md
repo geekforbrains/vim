@@ -1,8 +1,9 @@
 # Vim Setup
 
-1. Install fzf and ripgrep: `brew install fzf ripgrep`
+1. Install dependencies: `brew install fzf ripgrep ctags`
 2. Install vim-plug: https://github.com/junegunn/vim-plug
-3. Install plugins: `:PlugInstall`
+3. Copy `.ctags` file to Project root
+4. Install plugins: `:PlugInstall`
 
 ## Mac OSX
 
