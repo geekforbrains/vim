@@ -20,11 +20,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search tooling
 Plug 'junegunn/fzf.vim' " Fuzzy search integration with Vim
 Plug 'scrooloose/nerdcommenter' " Easier commenting
 Plug 'preservim/nerdtree' " File explorer
-Plug 'github/copilot.vim' " Github Copilot / AI
 Plug 'scrooloose/syntastic' " Catch syntax errors, unused imports, etc
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'tpope/vim-fugitive' " Git tooling in Vim
 Plug 'valloric/youcompleteme' " Autocompletion and jump to definition
+Plug 'github/copilot.vim' " Github Copilot / AI
 call plug#end()
 
 " =================================================================================================
@@ -106,6 +106,9 @@ nnoremap <leader>, :nohlsearch<CR>
 
 " Show tag browser
 nnoremap <leader>t :TagbarToggle<CR>
+
+" Go to definition with YCM (Ctrl+o to go back, Ctrl+i to go forward)
+nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Move between panes/splits via JKLH
 nnoremap <C-J> <C-W><C-J>
@@ -192,3 +195,9 @@ set rtp+=/usr/local/opt/fzf
 
 " Improve FZF results
 let $FZF_DEFAULT_COMMAND="find . -type f | grep -v '/env/' | grep -v '/\.git/' | grep -v '.pyc$' | grep -v '/\.cache/'"
+
+" Disable YCM auto complete (can still do manually with Ctrl+Space)
+let g:ycm_auto_trigger = 0
+
+" Setup copilot to learn from my other projects
+let g:copilot_workspace_folders = ["~/Projects"]
