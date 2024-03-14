@@ -14,26 +14,22 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'sheerun/vim-polyglot' " Better syntax highlighting
 Plug 'arcticicestudio/nord-vim' " Color scheme
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search tooling
 Plug 'junegunn/fzf.vim' " Fuzzy search integration with Vim
 Plug 'scrooloose/nerdcommenter' " Easier commenting
-Plug 'airblade/vim-gitgutter' " Show git diffs in left gutter
 Plug 'preservim/nerdtree' " File explorer
-Plug 'dense-analysis/ale' " ESLint tooling
-Plug 'tpope/vim-fugitive' " Git tooling
 Plug 'github/copilot.vim' " Github Copilot / AI
-Plug 'ludovicchabant/vim-gutentags' " Auto ctag-ing
+Plug 'scrooloose/syntastic' " Catch syntax errors, unused imports, etc
+Plug 'majutsushi/tagbar' " Tag browser
+Plug 'tpope/vim-fugitive' " Git tooling in Vim
+Plug 'valloric/youcompleteme' " Autocompletion and jump to definition
 call plug#end()
 
 " =================================================================================================
 " GENERAL SETTINGS
 " =================================================================================================
-
-" Set <leader> command to space bar.
-let mapleader=' '
 
 " Syntax highlighting
 syntax on
@@ -53,17 +49,11 @@ set ignorecase
 " Show quick search results as we type
 set incsearch
 
-" Dont try to be compatible with Vi
-set nocompatible
-
 " Highlight cursor line
 set cursorline
 
 " How many lines of history vim remembers
 set history=100
-
-" Try to indent correctly when hitting enter
-set autoindent
 
 " Highlight matching brackets
 set showmatch
@@ -71,16 +61,11 @@ set showmatch
 " Show current position
 set ruler
 
-" Highlight search results
-set hlsearch
-
 " Set vertical ruler
 set colorcolumn=100
 
-" Use spaces insead of tabs when using tab key
-set expandtab
-set shiftwidth=2
-set tabstop=2
+" Highlight search results
+set hlsearch
 
 " Disable vim backups/swaps
 set nobackup
@@ -91,8 +76,11 @@ set noswapfile
 set splitbelow
 set splitright
 
-" Ignore list for vimgrep
-set wildignore+=__pycache__/**,node_modules/**,env/**
+" Better tab-completion when searching
+"set path=.,**
+"set wildmenu
+"set wildmode=list:longest,full
+set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*node_modules*,*__pycache__*,*.git*,*.bundle*,env
 
 " Auto-resize splits when Vim gets resized.
 autocmd VimResized * wincmd =
@@ -101,29 +89,23 @@ autocmd VimResized * wincmd =
 " MAPPINGS
 " =================================================================================================
 
-" Clear highlighted searches
-nnoremap <leader>, :nohlsearch<CR>
+" Set <leader> command to space bar.
+let mapleader=' '
+
+" File explorer
+nnoremap <leader>e :NERDTreeToggle<CR>
 
 " Fuzzy file search with FZF
 nnoremap <leader>f :FZF<CR>
 
 " Fuzzy string search with ripgrep
-nnoremap <leader>s :Rg 
+nnoremap <leader>s :Rg
 
-" File explorer
-nnoremap <leader>e :NERDTreeToggle<CR>
+" Clear highlighted searches
+nnoremap <leader>, :nohlsearch<CR>
 
-" Quick fix eslint issues with ALE
-nnoremap <leader>x :ALEFix<CR>
-
-" Close (delete) open buffer
-nnoremap <leader>q :bd<CR>
-
-" Open quickfix pane
-nnoremap <leader>o :copen<CR>
-
-" Open GitHub Copilot AI panel
-nnoremap <leader>c :Copilot panel<CR>
+" Show tag browser
+nnoremap <leader>t :TagbarToggle<CR>
 
 " Move between panes/splits via JKLH
 nnoremap <C-J> <C-W><C-J>
@@ -135,53 +117,39 @@ nnoremap <C-H> <C-W><C-H>
 noremap <leader>y "*y
 noremap <leader>p "*p
 
-" Replace word under cursor or selected phrase, repeatable with '.' command
-" Similar to 'multi-cursor' in other editors
-nnoremap <leader>r :let @/='\<'.expand('<cword>').'\>'<CR>cgn
-xnoremap <leader>r "sy:let @/=@s<CR>cgn
-
-" ctag jump to definition
-nnoremap <leader>d :tag <C-r><C-w><CR>
-
-" ctag go back
-nnoremap <leader>b :pop<CR>
-
-" Navigate buffers with [ and ]
-nnoremap <leader>[ :bprevious<CR>
-nnoremap <leader>] :bnext<CR>
-
-" Toggle line wrap
-nnoremap <leader>w :set wrap!<CR>
-
 " =================================================================================================
 " THEME SETTINGS
 " =================================================================================================
 
-" Color scheme / theme tweaks
 set termguicolors
 set t_Co=256
 colorscheme nord
 
 " =================================================================================================
-" LANGUAGE SETTINGS
+" LANGUAGE FORMAT SETTINGS
 " =================================================================================================
+
+" Better indenting
+set autoindent
+
+" Enable filetype detection
+filetype on
+filetype plugin on
+filetype indent on
+
+" As default, use 2 spaces instead of tabs when using tab key
+set expandtab
+set shiftwidth=2
+set tabstop=2
 
 " Set Python files to use 4 spaces
 autocmd FileType python set expandtab
 autocmd FileType python set shiftwidth=4
 autocmd FileType python set tabstop=4
 
-" For HTML and JS
-autocmd filetype html,htmldjango,javascript set expandtab
-autocmd filetype html,htmldjango,javascript set shiftwidth=2
-autocmd filetype html,htmldjango,javascript set tabstop=2
-
 " =================================================================================================
 " PLUGIN SETTINGS
 " =================================================================================================
-
-" To ensure NERDComment plugin works correctly
-filetype plugin on
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -210,18 +178,11 @@ let g:NERDToggleCheckAllLines = 1
 " Show dotfiles
 let NERDTreeShowHidden=1
 
-" Ignore these files in file explorer
-set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*node_modules*,*__pycache__*,*.git*,*.bundle*,env
+" Respect wildignore settings for ignore files
 let NERDTreeRespectWildIgnore=1
 
 " Make file explorer window a bit smaller
-let g:NERDTreeWinSize=25
-
-" Set ALE lint tooling to use eslint only
-let g:ale_fixers = ['eslint']
-
-" Change ctags dir
-let g:gutentags_cache_dir = '.cache/ctags'
+let g:NERDTreeWinSize=28
 
 " Set airline to same theme as Vim
 let g:airline_theme='nord'
@@ -229,5 +190,5 @@ let g:airline_theme='nord'
 " Tell vim where FZF bin is located
 set rtp+=/usr/local/opt/fzf
 
+" Improve FZF results
 let $FZF_DEFAULT_COMMAND="find . -type f | grep -v '/env/' | grep -v '/\.git/' | grep -v '.pyc$' | grep -v '/\.cache/'"
-
