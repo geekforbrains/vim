@@ -20,10 +20,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search tooling
 Plug 'junegunn/fzf.vim' " Fuzzy search integration with Vim
 Plug 'scrooloose/nerdcommenter' " Easier commenting
 Plug 'preservim/nerdtree' " File explorer
-Plug 'scrooloose/syntastic' " Catch syntax errors, unused imports, etc
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'tpope/vim-fugitive' " Git tooling in Vim
 Plug 'valloric/youcompleteme' " Autocompletion and jump to definition
+Plug 'scrooloose/syntastic' " Catch syntax errors, unused imports, etc
 Plug 'github/copilot.vim' " Github Copilot / AI
 call plug#end()
 
@@ -201,3 +201,9 @@ let g:ycm_auto_trigger = 0
 
 " Setup copilot to learn from my other projects
 let g:copilot_workspace_folders = ["~/Projects"]
+
+" Set the include directories for C++ syntax checking
+let g:syntastic_cpp_include_dirs = [
+\ '~/.platformio/packages/framework-arduinoespressif32/cores/esp32',
+\ '~/.platformio/packages/framework-arduinoespressif32/libraries',
+\ ]
