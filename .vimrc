@@ -21,9 +21,7 @@ Plug 'junegunn/fzf.vim' " Fuzzy search integration with Vim
 Plug 'scrooloose/nerdcommenter' " Easier commenting
 Plug 'preservim/nerdtree' " File explorer
 Plug 'majutsushi/tagbar' " Tag browser
-Plug 'tpope/vim-fugitive' " Git tooling in Vim
 Plug 'valloric/youcompleteme' " Autocompletion and jump to definition
-Plug 'scrooloose/syntastic' " Catch syntax errors, unused imports, etc
 Plug 'github/copilot.vim' " Github Copilot / AI
 call plug#end()
 
@@ -99,7 +97,7 @@ nnoremap <leader>e :NERDTreeToggle<CR>
 nnoremap <leader>f :FZF<CR>
 
 " Fuzzy string search with ripgrep
-nnoremap <leader>s :Rg
+nnoremap <leader>s :Rg<CR>
 
 " Clear highlighted searches
 nnoremap <leader>, :nohlsearch<CR>
@@ -108,7 +106,10 @@ nnoremap <leader>, :nohlsearch<CR>
 nnoremap <leader>t :TagbarToggle<CR>
 
 " Go to definition with YCM (Ctrl+o to go back, Ctrl+i to go forward)
-nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap gd :YcmCompleter GoTo<CR>
+
+" Show list of references under cursor
+noremap gr :YcmCompleter GoToReferences<CR>
 
 " Move between panes/splits via JKLH
 nnoremap <C-J> <C-W><C-J>
@@ -149,6 +150,17 @@ set tabstop=2
 autocmd FileType python set expandtab
 autocmd FileType python set shiftwidth=4
 autocmd FileType python set tabstop=4
+
+" Set HTML, JS and Django templates to use 2 spaces
+autocmd FileType html set expandtab
+autocmd FileType html set shiftwidth=2
+autocmd FileType html set tabstop=2
+autocmd FileType htmldjango set expandtab
+autocmd FileType htmldjango set shiftwidth=2
+autocmd FileType htmldjango set tabstop=2
+autocmd FileType javascript set expandtab
+autocmd FileType javascript set shiftwidth=2
+autocmd FileType javascript set tabstop=2
 
 " =================================================================================================
 " PLUGIN SETTINGS
@@ -198,12 +210,7 @@ let $FZF_DEFAULT_COMMAND="find . -type f | grep -v '/env/' | grep -v '/\.git/' |
 
 " Disable YCM auto complete (can still do manually with Ctrl+Space)
 let g:ycm_auto_trigger = 0
+let g:ycm_enable_inlay_hints = 0
 
 " Setup copilot to learn from my other projects
 let g:copilot_workspace_folders = ["~/Projects"]
-
-" Set the include directories for C++ syntax checking
-let g:syntastic_cpp_include_dirs = [
-\ '~/.platformio/packages/framework-arduinoespressif32/cores/esp32',
-\ '~/.platformio/packages/framework-arduinoespressif32/libraries',
-\ ]
